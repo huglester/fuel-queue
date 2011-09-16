@@ -27,11 +27,11 @@ The database table scheme:
 ```sql
 CREATE TABLE `queue` (
   `id` bigint(22) NOT NULL AUTO_INCREMENT,
-  `queue` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `queue` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `priority` int(1) NOT NULL DEFAULT '5',
-  `payload` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `payload` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ```
 
 Redis: use defaults configurations from fuel/app/db.php redis configure it there.
