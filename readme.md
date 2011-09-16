@@ -9,15 +9,20 @@ Currently is unstable but works.
 
 # Installation
 Make a new file in fuel/app/tasks with the name queue.php on your application with the follow code:
+	```
 	<?php
 	include_once PKGPATH . 'queue/tasks/queue.php';
+	```
 
 now try on the command line:
+	```
 	php oil refine queue
+	```
 
 # Usage
 DB Driver:
 The database table scheme:
+	```
 	CREATE TABLE `queue` (
 	  `id` bigint(22) NOT NULL AUTO_INCREMENT,
 	  `queue` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -25,11 +30,14 @@ The database table scheme:
 	  `payload` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+	```
 
 Redis: use defaults configurations from fuel/app/db.php redis configure it there.
 
 Running workers for queues:
 use Oil utility for process queues
+	```
 	php oil refine queue <queue_name>
+	```
 
 
