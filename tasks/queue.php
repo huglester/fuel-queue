@@ -1,4 +1,13 @@
 <?php
+/**
+ * Fuel-queue a simple queue module for FuelPHP
+ *
+ * @package    Queue
+ * @author     Kavinsky
+ * @license    MIT License
+ * @copyright  2010 - 2011 Ignacio "Kavinsky" Muñoz
+ * @link       http://github.com/kavinsky/fuel-queue
+ */
 namespace Fuel\Tasks;
 
 
