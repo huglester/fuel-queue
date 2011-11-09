@@ -20,7 +20,7 @@ class Queue
 			$queue = 'default';
 		}
 				
-		\Cli::write('Processing queue: '.$queue);		
+		\Cli::write('[INFO] Processing queue: '.$queue);		
 		
 		try {
 			
@@ -28,22 +28,39 @@ class Queue
 			while(true)
 			{
 				sleep(5);
-				\Cli::write('Starting run '.$run_number);
+				\Cli::write('[INFO] Starting run');
 				
 				$queue_size = \Queue::size($queue);
+				
+				if($queue_size == 0)
+				{
+					continue;
+				}
+				
 				if ($queue_size < 25)
 				{
 					$runs = $queue_size;
 				}
 				
-				\Cli::write('Queue size: '.$queue_size);
-						
+				\Cli::write('[INFO] Queue size: '.$queue_size);
+				$total_usage = 0;		
 				for($i = 0; $i < $runs; ++$i)
 				{				
 					// execution environment
-					$job = \Queue::pop($queue);							
-					\Oil\Refine::run($job['class'], $job['args']);			
+					$job = \Queue::pop($queue);
+					\Cli::write('[INFO] -------------- RUNNING JOB: '.$job['class'].' args:'.@implode(',',$job['args']));		
+					\Oil\Refine::run($job['class'], $job['args']);
+					$total_usage += memory_get_usage();
+					\Cli::write('[INFO] -------------- END JOB: memory usage: '.\Num::format_bytes(memory_get_usage(), 2).' elapsed time:');
 				}
+				
+				\Cli::write("[INFO] Performed $i jobs");	
+				if($i > 0)
+				{
+					\Cli::write("[INFO] Total memory usage in this batch: ".\Num::format_bytes($total_usage, 2));
+					\Cli::write("[INFO] ".\Queue::size($queue)." jobs lefts on the queue $queue");
+				}
+							
 				
 				$run_number++;
 			}
@@ -51,7 +68,7 @@ class Queue
 		}
 		catch(Exception $e)
 		{
-			\Cli::write("Error: ". $e->getMessage());
+			\Cli::color("[ERROR] Error: ". $e->getMessage(), 'red');
 		}
 		
 		

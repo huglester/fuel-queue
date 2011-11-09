@@ -37,7 +37,7 @@ class Job
 		
 		Queue::push($queue, array(
 			'class' => $class,
-			'args'	=> array($args),
+			'args'	=> $args,
 			'id'	=> $id,
 		));
 		
