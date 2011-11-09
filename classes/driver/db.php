@@ -73,7 +73,7 @@ class Driver_DB
 		return $ret;
 	}
 	
-	public function enqueue($queue, $class, $args = null)
+	public function enqueue($queue, $class,array $args = null)
 	{
 		
 		$result = Job::create($queue, $class, $args);

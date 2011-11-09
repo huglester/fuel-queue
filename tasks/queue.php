@@ -15,38 +15,39 @@ class Queue
 {
 	public static function run($queue = null, $runs = 25)
 	{
-		if ($queue === null OR $queue === 'help')
+		if ($queue === null)
 		{
-			static::help();
-			return;
+			$queue = 'default';
 		}
-		
-		$queues = \Queue::queues();
-		if (!in_array($queue, $queues))
-		{
-			throw new \Fuel_Exception('Cannot locate queue: '.$queue);
-			return;
-		}
-		
-		\Cli::write('Processing queue: '.$queue);
-		
-		
-		$queue_size = \Queue::size($queue);
-		
-		if ($queue_size < 25)
-		{
-			$runs = $queue_size;
-		}
-		
-		\Cli::write('Queue size: '.$queue_size);
+				
+		\Cli::write('Processing queue: '.$queue);		
 		
 		try {
-			for($i = 0; $i < $runs; ++$i)
+			
+			$run_number = 0;
+			while(true)
 			{
-				// execution environment				
-				$job = \Queue::pop($queue);							
-				\Oil\Refine::run($job['class'], $job['args']);			
+				sleep(5);
+				\Cli::write('Starting run '.$run_number);
+				
+				$queue_size = \Queue::size($queue);
+				if ($queue_size < 25)
+				{
+					$runs = $queue_size;
+				}
+				
+				\Cli::write('Queue size: '.$queue_size);
+						
+				for($i = 0; $i < $runs; ++$i)
+				{				
+					// execution environment
+					$job = \Queue::pop($queue);							
+					\Oil\Refine::run($job['class'], $job['args']);			
+				}
+				
+				$run_number++;
 			}
+			
 		}
 		catch(Exception $e)
 		{
@@ -60,6 +61,7 @@ class Queue
 	
 	public static function help()
 	{
-		\Cli::write('Help ');
+		\Cli::write('Usage: php oil r|refine [<queue_name>]');
+		\Cli::write('If you dont specify the queue_name then will use "default" queue');
 	}
 }

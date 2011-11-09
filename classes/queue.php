@@ -71,7 +71,7 @@ class Queue
 	 * @param string $class The name of the class that contains the code to execute the job.
 	 * @param array $args Any optional arguments that should be passed when the job is executed.
 	 */
-	public static function enqueue($queue, $class, $args = null)
+	public static function enqueue($queue, $class, array $args = null)
 	{
 		return static::$instance->enqueue($queue, $class, $args);
 	}

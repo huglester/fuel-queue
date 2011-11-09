@@ -24,16 +24,4 @@ Autoloader::add_classes(array(
 	
 	// Tasks
 	'Fuel\\Tasks\\Queue'				=> __DIR__.'/classes/tasks/queue.php',
-	
-	// beanstalkd vendor
-	'BeanStalk'												=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueue'												=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueueJob'											=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueueNoServersSuppliedException'					=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueueNoValidServersException'						=> __DIR__.'/vendor/BeanStalk.php',		
-	'BeanQueueInvalidServerException'						=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueueInvalidSelectorBadReserverException'			=> __DIR__.'/vendor/BeanStalk.php',		
-	'BeanQueueInvalidSelectorBadServerPickerException'		=> __DIR__.'/vendor/BeanStalk.php',
-	'BeanQueueJobServerDiedException'						=> __DIR__.'/vendor/BeanStalk.php',		
-	'BeanQueueCouldNotConnectException'						=> __DIR__.'/vendor/BeanStalk.php',
 ));
